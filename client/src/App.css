@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+img{
+    max-width: none;
+}
+.no-img{
+    max-width: 100%;
+}
