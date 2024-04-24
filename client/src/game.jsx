@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react"
+import axios from "axios";
 
 function Game() {
     const imageRef = useRef(null);
@@ -8,6 +9,11 @@ function Game() {
     });
     const [toggle, setToggle] = useState(false)
     const [menu, setMenu] = useState(false)
+    useEffect(() => {
+        if(coordinates.x >605 && coordinates.x< 635 && coordinates.y > 275 && coordinates.y < 365){
+            console.log("w")
+        }
+    }, [coordinates]);
     const handleClick = () => {
         setToggle(!toggle)
         
@@ -23,13 +29,14 @@ function Game() {
             x: x.toFixed(0),
             y: y.toFixed(0)
         })
+        try{
+            axios.post("http://localhost:3000", coordinates, { withCredentials: true })
+        }catch(e){
+            console.log(e)
+        }
         
     }
-    useEffect(() => {
-        if(coordinates.x >605 && coordinates.x< 635 && coordinates.y > 275 && coordinates.y < 365){
-            console.log("w")
-        }
-    }, [coordinates]);
+    
     
 
 return(
