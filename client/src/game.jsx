@@ -10,15 +10,25 @@ function Game() {
     const [toggle, setToggle] = useState(false)
     const [menu, setMenu] = useState(false)
     useEffect(() => {
-        if(coordinates.x >605 && coordinates.x< 635 && coordinates.y > 275 && coordinates.y < 365){
-            console.log("w")
+        console.log("Coordinates:", coordinates);
+    }, [coordinates]);
+    useEffect(() => {
+        if (coordinates.x && coordinates.y) {
+            try {
+                axios.post("http://localhost:3000", coordinates, { withCredentials: true });
+            } catch (e) {
+                console.log(e);
+            }
         }
     }, [coordinates]);
+
+
     const handleClick = () => {
         setToggle(!toggle)
         
         console.log(toggle)
     }
+   
     const handleImageClick = (event) => {
         setMenu(!menu)
         if (!imageRef.current) return
@@ -29,13 +39,10 @@ function Game() {
             x: x.toFixed(0),
             y: y.toFixed(0)
         })
-        try{
-            axios.post("http://localhost:3000", coordinates, { withCredentials: true })
-        }catch(e){
-            console.log(e)
-        }
+     
         
     }
+  
     
     
 
@@ -44,7 +51,7 @@ return(
 <p onClick={handleClick} >Zoom in/out</p>
 <img src="walchar2.jpg" alt="" />
 <img onClick={handleImageClick} src="wal2.png" className={toggle ? 'img' : 'no-img' } alt="" ref={imageRef}/>
-{console.log(coordinates.y)}
+
 <div className={menu ? "menu" : "nomenu"} style={{left:coordinates.x + 'px',top:coordinates.y + 'px'}}>
     <div className="bbottom">
         <img src="jura.png" alt="" className="w-15 h-24" />
