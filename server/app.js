@@ -32,7 +32,7 @@ app.use(cors(corsOptions));
 app.get("/", async (req, res) => {
   try {
     const characters = await Character.find().exec();
-    console.log(Character.collection.name);
+    
 
     console.log(characters)
     res.send(characters);

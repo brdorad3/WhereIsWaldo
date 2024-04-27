@@ -7,16 +7,28 @@ function Game() {
         x: '',
         y: ''
     });
+    const [coordinates2, setCoordinates2] = useState({
+        x: '',
+        y: ''
+    });
+    
     const [toggle, setToggle] = useState(false)
     const [menu, setMenu] = useState(false)
 
     useEffect(() => {
         console.log("Coordinates:", coordinates);
+        console.log("Coordinates2: ", coordinates2)
     }, [coordinates]);
     useEffect(() => {
         if (coordinates.x && coordinates.y) {
             try {
+                if(toggle == false){
+                    console.log("WW")
+                    axios.post("http://localhost:3000", coordinates2, { withCredentials: true }); 
+                }else{
+                    
                 axios.post("http://localhost:3000", coordinates, { withCredentials: true });
+                }
             } catch (e) {
                 console.log(e);
             }
@@ -41,6 +53,10 @@ function Game() {
             x: x.toFixed(0),
             y: y.toFixed(0)
         })   
+        setCoordinates2({
+            x: (x * 1.785).toFixed(0) ,
+            y: (y * 1.785).toFixed(0)
+        }) 
     }
 return(
 <>
