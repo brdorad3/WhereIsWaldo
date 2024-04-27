@@ -6,10 +6,12 @@
 .img{
     position: relative;
     max-width: none;
+    
 }
 .no-img{
     position: relative;
     max-width: 100%;
+    
 }
 .green {
     color: #005309;   

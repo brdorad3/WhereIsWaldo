@@ -9,6 +9,7 @@ function Game() {
     });
     const [toggle, setToggle] = useState(false)
     const [menu, setMenu] = useState(false)
+
     useEffect(() => {
         console.log("Coordinates:", coordinates);
     }, [coordinates]);
@@ -28,6 +29,7 @@ function Game() {
         
         console.log(toggle)
     }
+
    
     const handleImageClick = (event) => {
         setMenu(!menu)
@@ -38,14 +40,8 @@ function Game() {
         setCoordinates({
             x: x.toFixed(0),
             y: y.toFixed(0)
-        })
-     
-        
+        })   
     }
-  
-    
-    
-
 return(
 <>
 <p onClick={handleClick} >Zoom in/out</p>
@@ -67,3 +63,4 @@ return(
 )
 }
 export default Game
+
