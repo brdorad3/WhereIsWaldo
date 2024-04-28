@@ -5,12 +5,13 @@ function Game() {
     const imageRef = useRef(null);
     const [coordinates, setCoordinates] = useState({
         x: '',
-        y: ''
+        y: '', 
     });
     const [coordinates2, setCoordinates2] = useState({
         x: '',
-        y: ''
+        y: '',
     });
+    const [name, setName] = useState(null)
     
     const [toggle, setToggle] = useState(false)
     const [menu, setMenu] = useState(false)
@@ -20,20 +21,16 @@ function Game() {
         console.log("Coordinates2: ", coordinates2)
     }, [coordinates]);
     useEffect(() => {
-        if (coordinates.x && coordinates.y) {
+        if (coordinates.x && coordinates.y && name) {
             try {
-                if(toggle == false){
-                    console.log("WW")
-                    axios.post("http://localhost:3000", coordinates2, { withCredentials: true }); 
-                }else{
-                    
-                axios.post("http://localhost:3000", coordinates, { withCredentials: true });
-                }
+                const dataToSend = toggle ? coordinates : { ...coordinates, name };
+                axios.post("http://localhost:3000", dataToSend, { withCredentials: true });
             } catch (e) {
                 console.log(e);
             }
         }
-    }, [coordinates]);
+    }, [coordinates, name, toggle]);
+    
 
 
     const handleClick = () => {
@@ -44,7 +41,8 @@ function Game() {
 
    
     const handleImageClick = (event) => {
-        setMenu(!menu)
+        
+        
         if (!imageRef.current) return
         const rect = imageRef.current.getBoundingClientRect();
         const x = event.clientX - rect.left;
@@ -57,6 +55,11 @@ function Game() {
             x: (x * 1.785).toFixed(0) ,
             y: (y * 1.785).toFixed(0)
         }) 
+        setMenu(true);
+    }
+    const handleIconClick = (char) =>{
+        setName(char)
+        setMenu(false)
     }
 return(
 <>
@@ -65,13 +68,13 @@ return(
 <img onClick={handleImageClick} src="wal2.png" className={toggle ? 'img' : 'no-img' } alt="" ref={imageRef}/>
 
 <div className={menu ? "menu" : "nomenu"} style={{left:coordinates.x + 'px',top:coordinates.y + 'px'}}>
-    <div className="bbottom">
+    <div className="bbottom" onClick={() => handleIconClick("Waldo")}>
         <img src="jura.png" alt="" className="w-15 h-24" />
         </div>
-    <div className="bbottom">
+    <div className="bbottom" onClick={() => handleIconClick("Wizard")}>
         <img src="Wizard.png" alt="" className="w-20 h-24"/>
     </div>
-    <div className="">
+    <div className="" onClick={() => handleIconClick("Oddlaw")}>
         <img src="Oddlaw.png" alt="" className="w-20 h-24" />
     </div>
 </div>

@@ -74,4 +74,7 @@ height: 10vh;
 }
 .bbottom{
     border-bottom: solid 1px gray;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
