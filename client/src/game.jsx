@@ -13,36 +13,36 @@ function Game() {
     });
     const [name, setName] = useState(null)
     
-    const [toggle, setToggle] = useState(false)
-    const [menu, setMenu] = useState(false)
+    const [toggle, setToggle] = useState(false);
+    const [menu, setMenu] = useState(false);
+    const [click, setClick] = useState(false);
 
     useEffect(() => {
-        console.log("Coordinates:", coordinates);
-        console.log("Coordinates2: ", coordinates2)
-    }, [coordinates]);
-    useEffect(() => {
-        if (coordinates.x && coordinates.y && name) {
+        if(click != false && name != null){
+        if (coordinates.x && coordinates.y) {
             try {
-                const dataToSend = toggle ? coordinates : { ...coordinates, name };
-                axios.post("http://localhost:3000", dataToSend, { withCredentials: true });
+                if(toggle == false){
+                    axios.post("http://localhost:3000", {coordinates2, name}, { withCredentials: true }); 
+                }else{
+                    
+                axios.post("http://localhost:3000", {coordinates, name}, { withCredentials: true });
+                }
             } catch (e) {
                 console.log(e);
             }
-        }
-    }, [coordinates, name, toggle]);
+        }}
+    }, [coordinates, name]);
     
 
 
     const handleClick = () => {
         setToggle(!toggle)
-        
-        console.log(toggle)
     }
 
    
     const handleImageClick = (event) => {
         
-        
+        setMenu(!menu)
         if (!imageRef.current) return
         const rect = imageRef.current.getBoundingClientRect();
         const x = event.clientX - rect.left;
@@ -55,11 +55,11 @@ function Game() {
             x: (x * 1.785).toFixed(0) ,
             y: (y * 1.785).toFixed(0)
         }) 
-        setMenu(true);
+        setClick(!click)
     }
     const handleIconClick = (char) =>{
         setName(char)
-        setMenu(false)
+       
     }
 return(
 <>
@@ -82,4 +82,3 @@ return(
 )
 }
 export default Game
-
