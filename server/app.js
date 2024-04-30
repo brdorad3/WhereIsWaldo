@@ -34,9 +34,7 @@ app.use(cors(corsOptions));
 app.get("/", async (req, res) => {
   try {
     const characters = await Character.find().exec();
-    
 
-    
     res.send(characters);
   
   } catch (error) {
@@ -45,12 +43,24 @@ app.get("/", async (req, res) => {
   }
 });
 
+app.post("/", async (req, res) => {
+  console.log(req.body.name);
+  const characters = await Character.findOne({ name: req.body.name }).exec();
+  console.log(characters.x);
+  console.log(characters.y);
+  console.log(req.body.coordinates2.x);
+  console.log(req.body.coordinates2.y);
 
+  if (req.body.coordinates2.x >= characters.x - 15 && req.body.coordinates2.x <= characters.x + 15) {
+      console.log("x-coordinate is within range");
 
-
-app.post("/", (req, res)=>{
-    console.log(req.body.name)
-})
+      if (req.body.coordinates2.y >= characters.y - 50 && req.body.coordinates2.y <= characters.y + 50) {
+          console.log("y-coordinate is within range");
+          console.log("w");
+          res.json({ w: "w" });
+      }
+  }
+});
 
 
 app.listen(3000)

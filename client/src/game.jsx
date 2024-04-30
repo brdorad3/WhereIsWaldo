@@ -16,7 +16,11 @@ function Game() {
     const [toggle, setToggle] = useState(false);
     const [menu, setMenu] = useState(false);
     const [click, setClick] = useState(false);
+    const [data, setData] = useState(null)
 
+    useEffect(()=>{
+        fetchData
+    },[coordinates])
     useEffect(() => {
         if(click != false && name != null){
         if (coordinates.x && coordinates.y) {
@@ -32,6 +36,13 @@ function Game() {
             }
         }}
     }, [coordinates, name]);
+
+    const fetchData = async() => 
+    {
+        const response = await fetch("http://localhost:3000")
+        const res = await response.json();
+        setData(res)
+    }
     
 
 
@@ -59,10 +70,14 @@ function Game() {
     }
     const handleIconClick = (char) =>{
         setName(char)
+        
        
     }
 return(
 <>
+{data && 
+alert(data)
+}
 <p onClick={handleClick} >Zoom in/out</p>
 <img src="walchar2.jpg" alt="" />
 <img onClick={handleImageClick} src="wal2.png" className={toggle ? 'img' : 'no-img' } alt="" ref={imageRef}/>
