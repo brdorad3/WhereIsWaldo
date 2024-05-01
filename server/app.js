@@ -35,7 +35,7 @@ app.get("/", async (req, res) => {
   try {
     const characters = await Character.find().exec();
 
-    res.send(characters);
+    res.send("w");
   
   } catch (error) {
     console.error(error);
@@ -48,8 +48,10 @@ app.post("/", async (req, res) => {
   const characters = await Character.findOne({ name: req.body.name }).exec();
   console.log(characters.x);
   console.log(characters.y);
-  console.log(req.body.coordinates2.x);
-  console.log(req.body.coordinates2.y);
+
+  if(req.body.coordinates2){
+    console.log(req.body.coordinates2.x);
+    console.log(req.body.coordinates2.y);
 
   if (req.body.coordinates2.x >= characters.x - 15 && req.body.coordinates2.x <= characters.x + 15) {
       console.log("x-coordinate is within range");
@@ -59,7 +61,23 @@ app.post("/", async (req, res) => {
           console.log("w");
           res.json({ w: "w" });
       }
-  }
+  }}
+
+  if(req.body.coordinates){
+    console.log(req.body.coordinates.x);
+    console.log(req.body.coordinates.y);
+
+  if (req.body.coordinates.x >= characters.x - 15 && req.body.coordinates.x <= characters.x + 15) {
+      console.log("x-coordinate is within range");
+
+      if (req.body.coordinates.y >= characters.y - 50 && req.body.coordinates.y <= characters.y + 50) {
+          console.log("y-coordinate is within range");
+          console.log("w");
+          res.json({ w: "w" });
+      }
+  }}
+
+  
 });
 
 

@@ -19,7 +19,7 @@ function Game() {
     const [data, setData] = useState(null)
 
     useEffect(()=>{
-        fetchData
+        fetchData()
     },[coordinates])
     useEffect(() => {
         if(click != false && name != null){
@@ -35,22 +35,18 @@ function Game() {
                 console.log(e);
             }
         }}
-    }, [coordinates, name]);
+    }, [coordinates, coordinates2, name]);
 
-    const fetchData = async() => 
-    {
+    const fetchData = async() => {
         const response = await fetch("http://localhost:3000")
         const res = await response.json();
         setData(res)
     }
     
-
-
     const handleClick = () => {
         setToggle(!toggle)
     }
 
-   
     const handleImageClick = (event) => {
         
         setMenu(!menu)
@@ -66,18 +62,19 @@ function Game() {
             x: (x * 1.785).toFixed(0) ,
             y: (y * 1.785).toFixed(0)
         }) 
-        setClick(!click)
+        setClick(prevClick => !prevClick);
+
     }
+
     const handleIconClick = (char) =>{
-        setName(char)
-        
-       
+        setName(char)   
     }
+
 return(
 <>
-{data && 
-alert(data)
-}
+
+{data && alert(JSON.stringify(data))}
+
 <p onClick={handleClick} >Zoom in/out</p>
 <img src="walchar2.jpg" alt="" />
 <img onClick={handleImageClick} src="wal2.png" className={toggle ? 'img' : 'no-img' } alt="" ref={imageRef}/>
