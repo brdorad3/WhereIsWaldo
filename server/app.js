@@ -27,7 +27,7 @@ mongoose.connection.on("error", (error) => {
   console.error("MongoDB connection error:", error);
 });
 
-app.use(bodyParser.urlencoded({ extended: false }))
+
 app.use(express.json());
 
 app.use(cors(corsOptions));
@@ -52,32 +52,35 @@ app.post("/", async (req, res) => {
   if(req.body.coordinates2){
     console.log(req.body.coordinates2.x);
     console.log(req.body.coordinates2.y);
+    const distance = Math.sqrt(Math.pow(req.body.coordinates2.x - characters.x, 2) + Math.pow(req.body.coordinates2.y - characters.y, 2));
+    console.log(distance)
 
-  if (req.body.coordinates2.x >= characters.x - 15 && req.body.coordinates2.x <= characters.x + 15) {
-      console.log("x-coordinate is within range");
-
-      if (req.body.coordinates2.y >= characters.y - 50 && req.body.coordinates2.y <= characters.y + 50) {
-          console.log("y-coordinate is within range");
+ 
+      if (distance<50) {
+          
           console.log("w");
-          res.json({ w: "w" });
-      }
-  }}
+          res.status(200).send("brr")
+  }
+  res.status(200).send("mrr")
+}
 
   if(req.body.coordinates){
     console.log(req.body.coordinates.x);
     console.log(req.body.coordinates.y);
 
-  if (req.body.coordinates.x >= characters.x - 15 && req.body.coordinates.x <= characters.x + 15) {
-      console.log("x-coordinate is within range");
+    const distance = Math.sqrt(Math.pow(req.body.coordinates.x - characters.x, 2) + Math.pow(req.body.coordinates.y - characters.y, 2));
+    console.log(distance)
 
-      if (req.body.coordinates.y >= characters.y - 50 && req.body.coordinates.y <= characters.y + 50) {
-          console.log("y-coordinate is within range");
+      if (distance<50) {
+          
           console.log("w");
-          res.json({ w: "w" });
-      }
-  }}
-
+          res.status(200).send("brr")
+  }else{
+    res.status(200).send("mrr")
+  }
   
+
+  }
 });
 
 

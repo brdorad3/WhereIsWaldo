@@ -20,6 +20,7 @@ function Game() {
 
     useEffect(()=>{
         fetchData()
+        console.log(coordinates)
     },[coordinates])
     useEffect(() => {
         if(click != false && name != null){
