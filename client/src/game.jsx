@@ -16,7 +16,13 @@ function Game() {
     const [toggle, setToggle] = useState(false);
     const [menu, setMenu] = useState(false);
     const [click, setClick] = useState(false);
+   
     const [data, setData] = useState(null)
+    const [chars, setChars] = useState({
+        waldo: false,
+        wizard: false,
+        oddlaw: false
+    })
 
  
     useEffect(() => {
@@ -67,13 +73,34 @@ function Game() {
     const handleIconClick = (char) =>{
         setName(char)   
     }
-    /*
+    
     useEffect(()=>{
         if(data){
-            alert(data)
+            if(data != 'bad'){
+                switch(data){
+                    case 'Waldo': 
+                    setChars({
+                        ...chars,
+                        waldo: true
+                     })
+                     break;
+                     case 'Wizard': 
+                    setChars({
+                        ...chars,
+                        wizard: true
+                     })
+                     break;
+                     case 'Oddlaw': 
+                    setChars({
+                        ...chars, 
+                        oddlaw: true
+                     })
+                     break;
+                }
+            }
         }
     },[data, name])
-    */
+    
 return(
 <>
 
@@ -82,9 +109,18 @@ return(
 <p onClick={handleClick} >Zoom in/out</p>
 <div className="relative">
 <img onClick={handleImageClick} src="wal2.png" className={toggle ? 'img' : 'no-img' } alt="" ref={imageRef}/>
-<img src="circ.png" alt="" className={toggle ? 'false' : 'true' } />
-<img src="circ.png" alt="" className={toggle ? 'false2' : 'true2' } />
-<img src="circ.png" alt="" className={toggle ? 'false3' : 'true3' } />
+{chars.waldo == true &&
+<img src="circ.png" alt="" className={toggle ? 'false' : 'true'} />
+}
+
+{chars.wizard == true &&
+<img src="circ.png" alt="" className={toggle ? 'false2' : 'true2'} />
+}
+
+{chars.oddlaw == true &&
+<img src="circ.png" alt="" className={toggle ? 'false3' : 'true3'} />
+}
+
 </div>
 
 <div className={menu ? "menu" : "nomenu"} style={{left:coordinates.x + 'px',top:coordinates.y + 'px'}}>

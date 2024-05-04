@@ -59,7 +59,7 @@ app.post("/", async (req, res) => {
       if (distance<50) {
           
           console.log("w");
-          res.status(200).send("good")
+          res.status(200).send(characters.name)
   }else{
     res.status(200).send("bad")
   }
@@ -76,7 +76,7 @@ app.post("/", async (req, res) => {
       if (distance<50) {
           
           console.log("w");
-          res.status(200).send("good")
+          res.status(200).send(characters.name)
   }else{
     res.status(200).send("bad")
   }
