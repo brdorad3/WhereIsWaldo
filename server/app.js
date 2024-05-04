@@ -32,6 +32,14 @@ app.use(express.json());
 
 app.use(cors(corsOptions));
 app.get("/", async (req, res) => {
+
+    res.send("w");
+  
+  
+  
+});
+
+app.get("/game", async (req, res) => {
   try {
     const characters = await Character.find().exec();
 
@@ -43,7 +51,7 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.post("/", async (req, res) => {
+app.post("/game", async (req, res) => {
   console.log(req.body.name);
   const characters = await Character.findOne({ name: req.body.name }).exec();
   console.log(characters.x);
@@ -61,6 +69,7 @@ app.post("/", async (req, res) => {
           console.log("w");
           res.status(200).send(characters.name)
   }else{
+    
     res.status(200).send("bad")
   }
   
@@ -78,6 +87,7 @@ app.post("/", async (req, res) => {
           console.log("w");
           res.status(200).send(characters.name)
   }else{
+    
     res.status(200).send("bad")
   }
   

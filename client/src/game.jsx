@@ -30,16 +30,18 @@ function Game() {
         if (coordinates.x && coordinates.y) {
             try {
                 if(toggle == false){
-                    axios.post("http://localhost:3000", {coordinates2, name}, { withCredentials: true })
+                    axios.post("http://localhost:3000/game", {coordinates2, name}, { withCredentials: true })
                     .then(response => {
                         setData(response.data)
                     })
+                    setName(null)
                 }else{
                     
-                axios.post("http://localhost:3000", {coordinates, name}, { withCredentials: true })
+                axios.post("http://localhost:3000/game", {coordinates, name}, { withCredentials: true })
                 .then(response => {
                     setData(response.data)
                 })
+                setName(null)
                 }
             } catch (e) {
                 console.log(e);
@@ -72,6 +74,7 @@ function Game() {
 
     const handleIconClick = (char) =>{
         setName(char)   
+
     }
     
     useEffect(()=>{
@@ -101,14 +104,23 @@ function Game() {
         }
     },[data, name])
     
+    
+
 return(
-<>
+<div >
 
 
-
+<div className="flex justify-between items-center">
 <p onClick={handleClick} >Zoom in/out</p>
+<div className="flex items-center gap-5">
+<p>Find these characters!</p>
+<img src="Wizard.png" width="3%" alt="" />
+<img src="jura.png" alt="" width="2.5%" />
+<img src="Oddlaw.png" alt="" width="2.5%" />
+</div>
+</div>
 <div className="relative">
-<img onClick={handleImageClick} src="wal2.png" className={toggle ? 'img' : 'no-img' } alt="" ref={imageRef}/>
+<img onClick={handleImageClick} src="wal2.png" className={toggle ? 'img' : 'no-img' } alt="" ref={imageRef} />
 {chars.waldo == true &&
 <img src="circ.png" alt="" className={toggle ? 'false' : 'true'} />
 }
@@ -136,7 +148,7 @@ return(
     
 </div>
 
-</>
+</div>
 )
 }
 export default Game
