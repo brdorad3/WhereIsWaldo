@@ -90,8 +90,6 @@ app.post("/game", async (req, res) => {
     
     res.status(200).send("bad")
   }
-  
-
   }
 });
 
