@@ -30,14 +30,14 @@ function Game() {
         if (coordinates.x && coordinates.y) {
             try {
                 if(toggle == false){
-                    axios.post("https://whereiswaldo.onrender.com/game", {coordinates2, name}, { withCredentials: true })
+                    axios.post("https://whereiswaldo.onrender.com", {coordinates2, name}, { withCredentials: true })
                     .then(response => {
                         setData(response.data)
                     })
                     setName(null)
                 }else{
                     
-                axios.post("https://whereiswaldo.onrender.com/game", {coordinates, name}, { withCredentials: true })
+                axios.post("https://whereiswaldo.onrender.com", {coordinates, name}, { withCredentials: true })
                 .then(response => {
                     setData(response.data)
                 })

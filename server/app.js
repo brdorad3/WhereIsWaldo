@@ -31,15 +31,8 @@ mongoose.connection.on("error", (error) => {
 app.use(express.json());
 
 app.use(cors(corsOptions));
+
 app.get("/", async (req, res) => {
-
-    res.send("w");
-  
-  
-  
-});
-
-app.get("/game", async (req, res) => {
   try {
     const characters = await Character.find().exec();
 
@@ -51,7 +44,7 @@ app.get("/game", async (req, res) => {
   }
 });
 
-app.post("/game", async (req, res) => {
+app.post("/", async (req, res) => {
   console.log(req.body.name);
   const characters = await Character.findOne({ name: req.body.name }).exec();
   console.log(characters.x);
