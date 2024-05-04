@@ -18,31 +18,28 @@ function Game() {
     const [click, setClick] = useState(false);
     const [data, setData] = useState(null)
 
-    useEffect(()=>{
-        fetchData()
-        console.log(coordinates)
-    },[coordinates])
+ 
     useEffect(() => {
         if(click != false && name != null){
         if (coordinates.x && coordinates.y) {
             try {
                 if(toggle == false){
-                    axios.post("http://localhost:3000", {coordinates2, name}, { withCredentials: true }); 
+                    axios.post("http://localhost:3000", {coordinates2, name}, { withCredentials: true })
+                    .then(response => {
+                        setData(response.data)
+                    })
                 }else{
                     
-                axios.post("http://localhost:3000", {coordinates, name}, { withCredentials: true });
+                axios.post("http://localhost:3000", {coordinates, name}, { withCredentials: true })
+                .then(response => {
+                    setData(response.data)
+                })
                 }
             } catch (e) {
                 console.log(e);
             }
         }}
     }, [coordinates, coordinates2, name]);
-
-    const fetchData = async() => {
-        const response = await fetch("http://localhost:3000")
-        const res = await response.json();
-        setData(res)
-    }
     
     const handleClick = () => {
         setToggle(!toggle)
@@ -70,15 +67,25 @@ function Game() {
     const handleIconClick = (char) =>{
         setName(char)   
     }
-
+    /*
+    useEffect(()=>{
+        if(data){
+            alert(data)
+        }
+    },[data, name])
+    */
 return(
 <>
 
-{data && alert(JSON.stringify(data))}
+
 
 <p onClick={handleClick} >Zoom in/out</p>
-<img src="walchar2.jpg" alt="" />
+<div className="relative">
 <img onClick={handleImageClick} src="wal2.png" className={toggle ? 'img' : 'no-img' } alt="" ref={imageRef}/>
+<img src="circ.png" alt="" className={toggle ? 'false' : 'true' } />
+<img src="circ.png" alt="" className={toggle ? 'false2' : 'true2' } />
+<img src="circ.png" alt="" className={toggle ? 'false3' : 'true3' } />
+</div>
 
 <div className={menu ? "menu" : "nomenu"} style={{left:coordinates.x + 'px',top:coordinates.y + 'px'}}>
     <div className="bbottom" onClick={() => handleIconClick("Waldo")}>
@@ -90,7 +97,9 @@ return(
     <div className="" onClick={() => handleIconClick("Oddlaw")}>
         <img src="Oddlaw.png" alt="" className="w-20 h-24" />
     </div>
+    
 </div>
+
 </>
 )
 }

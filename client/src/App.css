@@ -78,3 +78,36 @@ height: 10vh;
     display: flex;
     justify-content: center;
 }
+.true{
+    width: 120px;
+    position:absolute;
+    top: 41.5%;
+    left: 3.6%;
+}
+.false{
+    position:absolute;
+    top: 41.5%;
+    left: 6%;
+}
+.true2{
+    width: 120px;
+    position:absolute;
+    top: 60.5%;
+    left: 78.5%;
+}
+.false2{
+    position:absolute;
+    top: 60.5%;
+    left: 139.6%;
+}
+.true3{
+    width: 120px;
+    position:absolute;
+    top: 47%;
+    left: 74.6%;
+}
+.false3{
+    position:absolute;
+    top: 46.7%;
+    left: 133%;
+}

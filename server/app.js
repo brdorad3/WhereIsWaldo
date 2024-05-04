@@ -59,9 +59,11 @@ app.post("/", async (req, res) => {
       if (distance<50) {
           
           console.log("w");
-          res.status(200).send("brr")
+          res.status(200).send("good")
+  }else{
+    res.status(200).send("bad")
   }
-  res.status(200).send("mrr")
+  
 }
 
   if(req.body.coordinates){
@@ -74,9 +76,9 @@ app.post("/", async (req, res) => {
       if (distance<50) {
           
           console.log("w");
-          res.status(200).send("brr")
+          res.status(200).send("good")
   }else{
-    res.status(200).send("mrr")
+    res.status(200).send("bad")
   }
   
 
