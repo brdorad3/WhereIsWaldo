@@ -1,2 +1,2 @@
 # WhereIsWaldo
-link - https://where-is-waldo-53pnoylub-brdorads-projects.vercel.app/
+link - https://where-is-waldo-49hhmnd5d-brdorads-projects.vercel.app/
