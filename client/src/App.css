@@ -59,7 +59,7 @@ height: 10vh;
     align-items: center;
     z-index: 5;
     position: absolute;
-    width: 100px;
+    width: 6%;
     height: auto;
     background-color: white;
     display: flex;
@@ -79,7 +79,7 @@ height: 10vh;
     justify-content: center;
 }
 .true{
-    width: 120px;
+    width: 8%;
     position:absolute;
     top: 41.5%;
     left: 3.6%;
@@ -90,7 +90,7 @@ height: 10vh;
     left: 6%;
 }
 .true2{
-    width: 120px;
+    width: 8%;
     position:absolute;
     top: 60.5%;
     left: 78.5%;
@@ -101,7 +101,7 @@ height: 10vh;
     left: 139.6%;
 }
 .true3{
-    width: 120px;
+    width: 8%;
     position:absolute;
     top: 47%;
     left: 74.6%;
@@ -112,3 +112,11 @@ height: 10vh;
     left: 133%;
 }
 .none{display: none;}
+.h{
+    height: 6rem;
+}
+@media screen and (max-width:600px) {
+    .h{
+        height: 2rem;
+    }
+}

@@ -30,14 +30,16 @@ function Game() {
         if (coordinates.x && coordinates.y) {
             try {
                 if(toggle == false){
-                    axios.post("https://whereiswaldo.onrender.com", {coordinates2, name}, { withCredentials: true })
+                   // axios.post("https://whereiswaldo.onrender.com", {coordinates2, name}, { withCredentials: true })
+                   axios.post("http://localhost:3000", {coordinates2, name}, { withCredentials: true })
                     .then(response => {
                         setData(response.data)
                     })
                     setName(null)
                 }else{
                     
-                axios.post("https://whereiswaldo.onrender.com", {coordinates, name}, { withCredentials: true })
+               // axios.post("https://whereiswaldo.onrender.com", {coordinates, name}, { withCredentials: true })
+               axios.post("http://localhost:3000", {coordinates, name}, { withCredentials: true })
                 .then(response => {
                     setData(response.data)
                 })
@@ -137,13 +139,13 @@ return(
 
 <div className={menu ? "menu" : "nomenu"} style={{left:coordinates.x + 'px',top:coordinates.y + 'px'}}>
     <div className="bbottom" onClick={() => handleIconClick("Waldo")}>
-        <img src="jura.png" alt="" className="w-15 h-24" />
+        <img src="jura.png" alt="" className="w-15 h" />
         </div>
     <div className="bbottom" onClick={() => handleIconClick("Wizard")}>
-        <img src="Wizard.png" alt="" className="w-20 h-24"/>
+        <img src="Wizard.png" alt="" className="w-20 h"/>
     </div>
     <div className="" onClick={() => handleIconClick("Oddlaw")}>
-        <img src="Oddlaw.png" alt="" className="w-20 h-24" />
+        <img src="Oddlaw.png" alt="" className="w-20 h" />
     </div>
     
 </div>
