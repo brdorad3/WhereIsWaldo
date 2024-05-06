@@ -7,8 +7,7 @@ require('dotenv').config()
 const Character = require("./models/character")
 
 const corsOptions = {
-   // origin: 'https://where-is-waldo-53pnoylub-brdorads-projects.vercel.app',
-   origin: 'http://localhost:5173',
+    origin: 'https://where-is-waldo-53pnoylub-brdorads-projects.vercel.app',
     credentials: true,
     optionSuccessStatus: 200
   };
