@@ -7,7 +7,7 @@ require('dotenv').config()
 const Character = require("./models/character")
 
 const corsOptions = {
-    origin: 'https://where-is-waldo-53pnoylub-brdorads-projects.vercel.app',
+    origin: 'https://where-is-waldo-49hhmnd5d-brdorads-projects.vercel.app',
     credentials: true,
     optionSuccessStatus: 200
   };
