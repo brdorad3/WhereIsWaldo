@@ -12,7 +12,15 @@ const character = new Schema({
         required: true
     },
     y: {
-        type: String,
+        type: Number,
+        required: true
+    },
+    xp: {
+        type: Number,
+        required: true
+    },
+    yp: {
+        type: Number,
         required: true
     }
 }, { collection: 'character' })

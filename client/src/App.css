@@ -59,7 +59,7 @@ height: 10vh;
     align-items: center;
     z-index: 5;
     position: absolute;
-    width: 6%;
+    width: 3.5%;
     height: auto;
     background-color: white;
     display: flex;
@@ -115,8 +115,25 @@ height: 10vh;
 .h{
     height: 6rem;
 }
+.icons{
+    width: 35px;
+    
+}
+.icon{
+    height: 55px;
+}
 @media screen and (max-width:600px) {
     .h{
         height: 2rem;
+    }
+    .icons{
+        width: 25px;
+    }
+    .icon{
+        height: auto;
+    }
+    .menu{
+        width: 20px;
+        height: auto
     }
 }

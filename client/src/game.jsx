@@ -23,52 +23,48 @@ function Game() {
         wizard: false,
         oddlaw: false
     })
-
+    let rect;
  
     useEffect(() => {
         if(click != false && name != null){
-        if (coordinates.x && coordinates.y) {
             try {
-                if(toggle == false){
-                   axios.post("https://whereiswaldo.onrender.com", {coordinates2, name}, { withCredentials: true })
-                   
-                    .then(response => {
-                        setData(response.data)
-                    })
-                    setName(null)
-                }else{
-                    
+               
                 axios.post("https://whereiswaldo.onrender.com", {coordinates, name}, { withCredentials: true })
                 .then(response => {
                     setData(response.data)
                 })
                 setName(null)
-                }
+                
             } catch (e) {
                 console.log(e);
             }
-        }}
-    }, [coordinates, coordinates2, name]);
+        }
+    }, [coordinates, name]);
     
     const handleClick = () => {
         setToggle(!toggle)
     }
 
     const handleImageClick = (event) => {
-        
+        rect = imageRef.current.getBoundingClientRect();
         setMenu(!menu)
         if (!imageRef.current) return
-        const rect = imageRef.current.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-        setCoordinates({
-            x: x.toFixed(0),
-            y: y.toFixed(0)
-        })   
+        
+        let x = event.clientX - rect.left;
+        let y = event.clientY - rect.top;
+
         setCoordinates2({
-            x: (x * 1.785).toFixed(0) ,
-            y: (y * 1.785).toFixed(0)
+            x: x.toFixed(0) ,
+            y: y.toFixed(0)
         }) 
+        
+        x = ((x*100)/rect.width);
+        y = ((y*100)/rect.height)
+        setCoordinates({
+            x: x.toFixed(2),
+            y: y.toFixed(2)
+        })   
+        
         setClick(prevClick => !prevClick);
 
     }
@@ -104,20 +100,24 @@ function Game() {
             }
         }
     },[data, name])
-    
-    
-
+   
 return(
 <div >
 
 
-<div className="flex justify-between items-center">
-<p onClick={handleClick} >Zoom in/out</p>
-<div className="flex items-center gap-5">
-<p>Find these characters!</p>
-<img src="Wizard.png" width="3%" alt="" />
-<img src="jura.png" alt="" width="2.5%" />
-<img src="Oddlaw.png" alt="" width="2.5%" />
+<div className="flex justify-between items-center px-16 max-sm:px-1 bg-green">
+    
+<p className="yellow font-black tetx-lg max-sm:text-sm">Where&apos;s Waldo</p>
+
+<div className="flex items-center gap-10 max-sm:gap-1">
+<p className="yellow">Find these characters!</p>
+<div className="flex items-center gap-5 bg-yellow my-1 rounded-sm px-2 ">
+<img src="Wizard.png"  alt="characters" className="icons h-full icon"/>
+<p className="cursor-default green font-black">|</p>
+<img src="jura.png" alt="characters"  className="icons"/>
+<p className="cursor-default green font-black">|</p>
+<img src="Oddlaw.png" alt="characters" className="icons"/>
+</div>
 </div>
 </div>
 <div className="relative">
@@ -135,16 +135,15 @@ return(
 }
 
 </div>
-
-<div className={menu ? "menu" : "nomenu"} style={{left:coordinates.x + 'px',top:coordinates.y + 'px'}}>
+<div className={menu ? "menu" : "nomenu"} style={{left:coordinates2.x + 'px',top:coordinates2.y + 'px'}}>
     <div className="bbottom" onClick={() => handleIconClick("Waldo")}>
-        <img src="jura.png" alt="" className="w-15 h" />
+        <img src="jura.png" alt="" className="w-full h-full" />
         </div>
     <div className="bbottom" onClick={() => handleIconClick("Wizard")}>
-        <img src="Wizard.png" alt="" className="w-20 h"/>
+        <img src="Wizard.png" alt="" className="w-full h-full"/>
     </div>
     <div className="" onClick={() => handleIconClick("Oddlaw")}>
-        <img src="Oddlaw.png" alt="" className="w-20 h" />
+        <img src="Oddlaw.png" alt="" className="w-full h-full" />
     </div>
     
 </div>
