@@ -8,7 +8,7 @@ const Character = require("./models/character");
 const character = require("./models/character");
 
 const corsOptions = {
-    origin: 'http://localhost:5173',
+    origin: 'https://where-is-waldo-gfa1l20u8-brdorads-projects.vercel.app',
     credentials: true,
     optionSuccessStatus: 200
   };
